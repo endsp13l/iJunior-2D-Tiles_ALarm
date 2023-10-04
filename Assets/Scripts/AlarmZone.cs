@@ -1,16 +1,28 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AlarmZone : MonoBehaviour
 {
-    [SerializeField] private bool isInvasion;
+    private UnityEvent _movementDetected = new UnityEvent();
+    private UnityEvent _zoneCleared = new UnityEvent();
 
-    public bool IsInvasion => isInvasion;
+    public event UnityAction MovementDetected
+    {
+        add => _movementDetected.AddListener(value);
+        remove => _movementDetected.RemoveListener(value);
+    }
 
-    private void OnTriggerStay2D(Collider2D other)
+    public event UnityAction ZoneCleared
+    {
+        add => _zoneCleared.AddListener(value);
+        remove => _zoneCleared.RemoveListener(value);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<CharacterMovement>())
         {
-           isInvasion = true;
+            _movementDetected?.Invoke();
         }
     }
 
@@ -18,7 +30,7 @@ public class AlarmZone : MonoBehaviour
     {
         if (other.GetComponent<CharacterMovement>())
         {
-            isInvasion = false;
+            _zoneCleared?.Invoke();
         }
     }
 }

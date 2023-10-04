@@ -621,7 +621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dada69f5572534dafff99729162a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInvasion: 0
 --- !u!1 &1159029546
 GameObject:
   m_ObjectHideFlags: 0
