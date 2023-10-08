@@ -32,12 +32,14 @@ public class Alarm : MonoBehaviour
     private void TurnOn()
     {
         _isActive = true;
+        StopCoroutine(DecreaseVolume());
         StartCoroutine(IncreaseVolume());
     }
 
     private void TurnOff()
     {
         _isActive = false;
+        StopCoroutine(IncreaseVolume());
         StartCoroutine(DecreaseVolume());
     }
 
